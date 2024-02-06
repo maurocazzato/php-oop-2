@@ -12,6 +12,39 @@
 
 <?php
 include 'prodotti.php';
+
+try {
+    
+    foreach ($prodotti_cani as $prodotto) {
+        try {
+            if ($prodotto->tipo_articolo === "") {
+                if (empty($prodotto->immagine)) {
+                    throw new ImmagineNonDisponibileException();
+                }
+                $prodotto->stampaCard();
+            }
+        } catch (ImmagineNonDisponibileException $e) {
+            echo '<p class="error">' . $e->errorMessage() . '</p>';
+        }
+    }
+
+    foreach ($prodotti_gatti as $prodotto) {
+        try {
+            if ($prodotto->tipo_articolo === "") {
+                if (empty($prodotto->immagine)) {
+                    throw new ImmagineNonDisponibileException();
+                }
+                $prodotto->stampaCard();
+            }
+        } catch (ImmagineNonDisponibileException $e) {
+            echo '<p class="error">' . $e->errorMessage() . '</p>';
+        }
+    }
+} catch (Exception $e) {
+
+    echo '<p class="error">' . $e->getMessage() . '</p>';
+}
+
 ?>
 
 <section class="container">

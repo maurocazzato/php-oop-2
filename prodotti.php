@@ -1,5 +1,11 @@
 <?php
 
+trait ScontoClienteRegistrato {
+    public function applicaSconto($prezzo, $percentualeSconto) {
+        return $prezzo - ($prezzo * $percentualeSconto / 100);
+    }
+}
+
 class Prodotto {
     public $id_prodotto;
     public $categoria;
@@ -61,6 +67,12 @@ class ProdottoGatti extends Prodotto {
     public function stampaCard() {
         parent::stampaCard();
         echo '<p class="taglia">Taglia: ' . $this->taglia . '</p>';
+    }
+}
+
+class ImmagineNonDisponibileException extends Exception {
+    public function errorMessage() {
+        return "Immagine non disponibile per questo prodotto.";
     }
 }
 
